@@ -17,9 +17,17 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://plots-crm.netlify.app", // specify the allowed origin
+    origin: function (origin, callback) {
+      // Check if the request origin is the same or a child of the specified origin
+      const allowedOrigins = ["https://plots-crm.netlify.app"];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, // enable credentials (cookies, authorization headers, etc.)
+    credentials: true,
     allowedHeaders: "Content-Type,Authorization",
   })
 );

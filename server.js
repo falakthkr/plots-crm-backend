@@ -17,7 +17,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // specify the allowed origin
+    origin: "https://plots-crm.netlify.app/", // specify the allowed origin
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true, // enable credentials (cookies, authorization headers, etc.)
   })

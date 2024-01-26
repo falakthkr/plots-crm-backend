@@ -54,6 +54,11 @@ passport.deserializeUser(async (id, done) => {
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/plots", plotRoutes);
+app.post("/", (req, res) => {
+  res.json({
+    message: "APIs are working",
+  });
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

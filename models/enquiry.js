@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const enquirySchema = new mongoose.Schema({
   plotId: { type: Number, required: true },
   userDetails: { type: String, required: true },
-  plotNumber: { type: Number, required: true },
+  plotNumber: { type: Number },
   plotDirections: { type: String, required: true },
   isCornerPlot: { type: Boolean, default: false },
   paymentMethod: { type: String, required: true },

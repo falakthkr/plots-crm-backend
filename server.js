@@ -15,22 +15,24 @@ dotenv.config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Check if the request origin is the same or a child of the specified origin
-      const allowedOrigins = ["https://plots-crm.netlify.app"];
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-    allowedHeaders: "Content-Type,Authorization",
-  })
-);
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       // Check if the request origin is the same or a child of the specified origin
+//       const allowedOrigins = ["https://plots-crm.netlify.app"];
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     credentials: true,
+//     allowedHeaders: "Content-Type,Authorization",
+//   })
+// );
+
+app.use(cors());
 
 mongoose.connect(process.env.ATLAS_URI, {
   useNewUrlParser: true,

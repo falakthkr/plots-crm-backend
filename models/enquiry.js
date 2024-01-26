@@ -2,12 +2,8 @@
 const mongoose = require("mongoose");
 
 const enquirySchema = new mongoose.Schema({
-  plotId: { type: mongoose.Schema.Types.ObjectId, ref: "Plot", required: true },
-  userDetails: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
+  plotId: { type: Number, required: true },
+  userDetails: { type: String, required: true },
   plotNumber: { type: Number, required: true },
   plotDirections: { type: String, required: true },
   isCornerPlot: { type: Boolean, default: false },

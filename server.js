@@ -1,43 +1,62 @@
+// server.js
 const express = require("express");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const passport = require("passport");
+const User = require("./models/user");
+const authRoutes = require("./routes/authRoutes");
+const plotRoutes = require("./routes/plotRoutes");
 const dotenv = require("dotenv");
-var bodyParser = require("body-parser");
+const crypto = require("crypto");
+const bcrypt = require("bcrypt");
 const cors = require("cors");
 
 dotenv.config();
+
 const app = express();
+app.use(cors());
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-// app.use(cookieParser());
-var corsOptions = {
-  origin: ["http://localhost:3000"],
-};
+// app.use(
+//   cors({
+//     origin: "http://yourfrontenddomain.com", // specify the allowed origin
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     credentials: true, // enable credentials (cookies, authorization headers, etc.)
+//   })
+// );
 
-app.use(cors(corsOptions));
+mongoose.connect(process.env.ATLAS_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-const authRoute = require("./routes/auth/userAuth");
-
-app.use("/auth", authRoute);
-
-mongoose.connect(
-  process.env.ATLAS_URI.toString(),
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  (err) => {
-    if (err) {
-      console.log(err);
-      console.log("Error connecting the database");
-    } else {
-      console.log("Database successfully connected");
-    }
-  }
+app.use(
+  session({
+    secret: crypto.randomBytes(64).toString("hex"),
+    resave: false,
+    saveUninitialized: false,
+  })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
-const port = process.env.PORT || 8000;
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
 
-app.listen(port, () => {
-  console.log(`The server is up and running on ${port}!`);
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error);
+  }
+});
+
+app.use(express.json());
+app.use("/api/auth", authRoutes);
+app.use("/api/plots", plotRoutes);
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

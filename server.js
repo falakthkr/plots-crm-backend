@@ -20,6 +20,7 @@ app.use(
     origin: "https://plots-crm.netlify.app", // specify the allowed origin
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true, // enable credentials (cookies, authorization headers, etc.)
+    allowedHeaders: "Content-Type,Authorization",
   })
 );
 

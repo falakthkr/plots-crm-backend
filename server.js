@@ -14,15 +14,14 @@ const cors = require("cors");
 dotenv.config();
 
 const app = express();
-app.use(cors());
 
-// app.use(
-//   cors({
-//     origin: "http://yourfrontenddomain.com", // specify the allowed origin
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     credentials: true, // enable credentials (cookies, authorization headers, etc.)
-//   })
-// );
+app.use(
+  cors({
+    origin: "http://localhost:3000", // specify the allowed origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // enable credentials (cookies, authorization headers, etc.)
+  })
+);
 
 mongoose.connect(process.env.ATLAS_URI, {
   useNewUrlParser: true,

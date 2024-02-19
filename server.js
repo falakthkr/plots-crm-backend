@@ -6,6 +6,7 @@ const passport = require("passport");
 const User = require("./models/user");
 const authRoutes = require("./routes/authRoutes");
 const plotRoutes = require("./routes/plotRoutes");
+const userRoutes = require("./routes/userRoutes");
 const dotenv = require("dotenv");
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
@@ -65,6 +66,7 @@ passport.deserializeUser(async (id, done) => {
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/plots", plotRoutes);
+app.use("/api/users", userRoutes);
 app.post("/", (req, res) => {
   res.json({
     message: "APIs are working",

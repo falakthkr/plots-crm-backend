@@ -2,6 +2,33 @@
 const Plot = require("../../models/plots");
 const Enquiry = require("../../models/enquiry");
 
+exports.getAllPlots = async (req, res) => {
+  try {
+    let filters = {};
+    if (req.query.plotId) {
+      filters.plotId = req.query.plotId;
+    }
+    if (req.query.plotDirection) {
+      filters.plotDirection = req.query.plotDirection;
+    }
+    if (req.query.plotSize) {
+      filters.plotSize = req.query.plotSize;
+    }
+    if (req.query.plotStatus) {
+      filters.plotStatus = req.query.plotStatus;
+    }
+
+    const plots = await Plot.find(filters);
+    res.json(plots);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getPlotById = async (req, res) => {
+  res.json(res.plot);
+};
+
 exports.getPlotsData = async (req, res) => {
   try {
     const plotsData = await Plot.find(

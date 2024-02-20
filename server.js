@@ -9,7 +9,7 @@ const plotRoutes = require("./routes/plotRoutes");
 const userRoutes = require("./routes/userRoutes");
 const dotenv = require("dotenv");
 const crypto = require("crypto");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const cors = require("cors");
 
 dotenv.config();

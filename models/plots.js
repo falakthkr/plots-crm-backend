@@ -1,30 +1,15 @@
+// models/Plot.js
 const mongoose = require("mongoose");
 
 const plotSchema = new mongoose.Schema({
-  plotId: {
-    type: String,
-    required: true,
-  },
-  plotSize: {
-    type: String,
-    required: true,
-  },
-  plotDirection: {
-    type: String,
-    required: true,
-  },
-  plotPrice: {
-    type: Number,
-    required: true,
-  },
-  totalPlotEnquiries: {
-    type: Number,
-    default: 0,
-  },
-  plotStatus: {
-    type: String,
-    required: true,
-  },
+  plotNumber: { type: String, required: true },
+  projectName: { type: String, required: true },
+  isCornerPlot: { type: Boolean, default: false },
+  price: { type: Number, required: true },
+  totalEnquiries: { type: Number, required: true, default: 0 },
+  // ... other fields
 });
 
-module.exports = mongoose.model("Plot", plotSchema);
+const Plot = mongoose.model("Plot", plotSchema);
+
+module.exports = Plot;

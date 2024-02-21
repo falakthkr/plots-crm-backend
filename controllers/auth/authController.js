@@ -93,7 +93,6 @@ exports.registerUser = async (req, res) => {
 
 exports.login = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-    console.log(user, "user");
     if (err) {
       console.error("Error during authentication:", err);
       return next(err);

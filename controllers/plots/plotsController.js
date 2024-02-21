@@ -13,6 +13,22 @@ exports.getPlotsData = async (req, res) => {
   }
 };
 
+exports.getPlotDetailsById = async (req, res) => {
+  try {
+    const { plotId } = req.params;
+    const plotData = await Plot.findOne({ plotId });
+
+    if (!plotData) {
+      return res.status(404).json({ message: "Plot not found" });
+    }
+
+    res.status(200).json(plotData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 const calculateTotalEnquiries = async (plotId) => {
   try {
     const totalEnquiries = await Enquiry.countDocuments({ plotId });

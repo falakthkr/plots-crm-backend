@@ -2,12 +2,15 @@
 const mongoose = require("mongoose");
 
 const plotSchema = new mongoose.Schema({
-  plotNumber: { type: String, required: true },
+  plotId: { type: Number, required: true },
   projectName: { type: String, required: true },
-  isCornerPlot: { type: Boolean, default: false },
-  price: { type: Number, required: true },
-  totalEnquiries: { type: Number, required: true, default: 0 },
-  // ... other fields
+  isCorner: { type: Boolean, default: false },
+  plotSize: { type: String, required: true },
+  plotDirection: { type: String },
+  oSize: { type: String },
+  roadSize: { type: String },
+  mgmt: { type: Boolean },
+  appdSel: { type: Boolean },
 });
 
 const Plot = mongoose.model("Plot", plotSchema);

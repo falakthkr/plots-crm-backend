@@ -4,7 +4,7 @@ const enquiriesController = require("../controllers/plots/enquiryController");
 
 const router = express.Router();
 
-router.get("/plots", plotsController.getPlotsData);
+router.get("/", plotsController.getPlotsData);
 router.post("/enquiry", enquiriesController.addEnquiry);
 router.get("/all-enquiries", enquiriesController.getAllEnquiries);
 

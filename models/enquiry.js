@@ -1,22 +1,44 @@
-// models/Enquiry.js
 const mongoose = require("mongoose");
 
+// Define the enquiry schema
 const enquirySchema = new mongoose.Schema({
-  plotId: { type: Number, required: true },
-  userDetails: { type: String, required: true },
-  plotNumber: { type: Number },
-  plotDirections: { type: String, required: true },
-  isCornerPlot: { type: Boolean, default: false },
-  paymentMethod: { type: String, required: true },
-  pendingPayment: { type: Number, required: true },
-  completedPayment: { type: Number, default: 0 },
-  status: {
+  plotId: {
     type: String,
-    enum: ["Sold", "Can’t be sold", "Not sold"],
-    default: "Not sold",
+    required: true,
   },
+  plotDirection: {
+    type: String,
+    required: true,
+  },
+  plotSize: {
+    type: String,
+    required: true,
+  },
+  plotPrice: {
+    type: Number,
+    required: true,
+  },
+  userName: {
+    type: String,
+    required: true,
+  },
+  userPhoneNumber: {
+    type: String,
+    required: true,
+  },
+  userAddress: {
+    type: String,
+    required: true,
+  },
+  userEmail: {
+    type: String,
+    required: true,
+  },
+  notes: String,
 });
 
+// Create a model based on the schema
 const Enquiry = mongoose.model("Enquiry", enquirySchema);
 
+// Export the model
 module.exports = Enquiry;

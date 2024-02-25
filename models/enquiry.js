@@ -34,6 +34,10 @@ const enquirySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: String,
+    required: true,
+  },
   notes: String,
 });
 

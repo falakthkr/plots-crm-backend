@@ -5,6 +5,9 @@ const enquiryController = require("../controllers/enquiry/enquiriesController");
 const {
   transferToBookings,
   getAllBookings,
+  getBookingById,
+  addPaymentToBooking,
+  getPaymentsOfBooking,
 } = require("../controllers/enquiry/bookingsController");
 const router = express.Router();
 
@@ -17,6 +20,9 @@ router.get("/", enquiryController.getAllEnquiries);
 router.delete("/:id", enquiryController.deleteEnquiry);
 router.post("/transfer", transferToBookings);
 router.get("/all-bookings", getAllBookings);
+router.get("/all-bookings/:id", getBookingById);
+router.post("/booking/:id/add-payment", addPaymentToBooking);
+router.get("/booking/:id/payments", getPaymentsOfBooking);
 
 // Export the router
 module.exports = router;

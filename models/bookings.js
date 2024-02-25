@@ -2,6 +2,25 @@
 
 const mongoose = require("mongoose");
 
+const paymentSchema = new mongoose.Schema({
+  amount: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  paymentMethod: {
+    type: String,
+    required: true,
+  },
+});
+
 const bookingSchema = new mongoose.Schema({
   plotId: {
     type: String,
@@ -35,10 +54,12 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: String,
+    required: true,
+  },
   notes: String,
-  totalPlotPrice: Number,
-  pricePaid: Number,
-  methodOfPayment: String,
+  payments: [paymentSchema],
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);

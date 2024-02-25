@@ -14,6 +14,7 @@ const addEnquiry = async (req, res) => {
     userAddress,
     userEmail,
     notes,
+    status,
   } = req.body;
 
   // Basic validation
@@ -24,7 +25,8 @@ const addEnquiry = async (req, res) => {
     !plotPrice ||
     !userName ||
     !userPhoneNumber ||
-    !userAddress
+    !userAddress ||
+    !status
   ) {
     return res.status(400).json({ error: "Missing required fields" });
   }
@@ -40,6 +42,7 @@ const addEnquiry = async (req, res) => {
     userAddress,
     userEmail,
     notes,
+    status: "inEnquiry",
   };
 
   // Store the enquiry

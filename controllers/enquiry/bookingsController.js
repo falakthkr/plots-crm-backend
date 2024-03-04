@@ -46,6 +46,20 @@ const getAllBookings = async (req, res) => {
   }
 };
 
+const getAllBookedPlotIds = async (req, res) => {
+  try {
+    // Find all bookings with status "booked"
+    const bookings = await Booking.find({ status: req.params.status });
+
+    // Extract plotIds from the bookings and put them in an array
+    const bookedPlotIds = bookings.map((booking) => booking.plotId);
+
+    res.status(200).json(bookedPlotIds);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const getBookingById = async (req, res) => {
   try {
     const bookingId = req.params.id; // Assuming you pass bookingId as a route parameter
@@ -110,4 +124,5 @@ module.exports = {
   getBookingById,
   addPaymentToBooking,
   getPaymentsOfBooking,
+  getAllBookedPlotIds,
 };

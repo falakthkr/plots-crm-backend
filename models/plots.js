@@ -11,6 +11,11 @@ const plotSchema = new mongoose.Schema({
   roadSize: { type: String },
   mgmt: { type: Boolean },
   appdSel: { type: Boolean },
+  status: {
+    type: String,
+    enum: ["booked", "inEnquiry", null],
+    required: true,
+  },
 });
 
 const Plot = mongoose.model("Plot", plotSchema);

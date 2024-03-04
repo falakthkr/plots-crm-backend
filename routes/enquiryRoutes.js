@@ -8,6 +8,7 @@ const {
   getBookingById,
   addPaymentToBooking,
   getPaymentsOfBooking,
+  getAllBookedPlotIds,
 } = require("../controllers/enquiry/bookingsController");
 const router = express.Router();
 
@@ -23,6 +24,7 @@ router.get("/all-bookings", getAllBookings);
 router.get("/all-bookings/:id", getBookingById);
 router.post("/booking/:id/add-payment", addPaymentToBooking);
 router.get("/booking/:id/payments", getPaymentsOfBooking);
+router.get("/booking/:status", getAllBookedPlotIds);
 
 // Export the router
 module.exports = router;

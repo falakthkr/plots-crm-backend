@@ -20,6 +20,8 @@ const transferToBookings = async (req, res) => {
       pricePaid: req.body.pricePaid,
       methodOfPayment: req.body.methodOfPayment,
       status: "booked",
+      emiOption: enquiry.emiOption,
+      paymentOption: enquiry.paymentOption,
     });
 
     // Save the new booking

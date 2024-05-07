@@ -58,6 +58,13 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  paymentOption: {
+    type: String,
+    required: true,
+  },
+  emiOptions: {
+    type: String,
+  },
   notes: String,
   payments: [paymentSchema],
 });
